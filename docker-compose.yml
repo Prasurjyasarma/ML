@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  plant-disease-cnn:
+    build: .
+    container_name: plant_disease_app
+    ports:
+      - "8888:8888"  # Jupyter server for VS Code
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./notebooks:/app/notebooks
+      - .:/app  # Mount entire project for VS Code access
+    environment:
+      - PYTHONPATH=/app
+    # Keep container running for VS Code to connect
+    command: tail -f /dev/null
